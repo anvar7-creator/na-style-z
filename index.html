@@ -55,12 +55,27 @@
     </footer>
 
     <script>
-        function makeOrder(name, price) {
+         function makeOrder(name, price) {
             let phone = prompt("Введите ваш номер телефона для подтверждения заказа (например, +99890...):");
             if (!phone) return;
             
-            // Логику отправки сообщения в Телеграм мы подключим на следующем шаге
-            alert("Заказ на '" + name + "' принят! Мы свяжемся с вами по номеру " + phone);
+            // ТВОИ НАСТРОЙКИ (ЗАМЕНИ НА СВОИ ДАННЫЕ)
+            let botToken = "СЮДА_ВСТАВЬ_ТОКЕН_ОТ_BOTFATHER";
+            let chatId = "СЮДА_ВСТАВЬ_СВОЙ_ID_ИЗ_USERINFOBOT";
+            
+            let text = `🛍 Новый заказ на сайте Na_style_z!\n\nТовар: ${name}\nЦена: ${price}\nТелефон клиента: ${phone}`;
+            
+            // Официальный бесплатный запрос к серверам Telegram для отправки сообщения
+            let url = `https://telegram.org{botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+            
+            fetch(url)
+                .then(response => {
+                    if(response.ok) {
+                        alert("🫶🏻 Заказ успешно принят! Мы свяжемся с вами в ближайшее время.");
+                    } else {
+                        alert("Ошибка отправки. Пожалуйста, свяжитесь с нами напрямую.");
+                    }
+                });
         }
     </script>
 </body>
