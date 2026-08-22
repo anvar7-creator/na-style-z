@@ -17,7 +17,6 @@
         .product-title { font-size: 18px; font-weight: 600; margin: 10px 0 5px; }
         .product-price { color: #d4a373; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
         .btn-order { background: #d4a373; color: #fff; border: none; padding: 12px 25px; border-radius: 25px; width: 100%; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-order:hover { background: #b88b5c; }
         footer { text-align: center; padding: 30px 20px; color: #aaa; font-size: 12px; }
     </style>
 </head>
@@ -33,20 +32,11 @@
     </div>
 
     <div class="container">
-        <!-- Товар 1 -->
         <div class="product-card">
             <div class="product-img">Тут будет фото кушона</div>
             <div class="product-title">Трендовый Кушон для лица</div>
             <div class="product-price">145 000 сум</div>
             <button class="btn-order" onclick="makeOrder('Трендовый Кушон для лица', '145 000 сум')">Заказать</button>
-        </div>
-
-        <!-- Товар 2 -->
-        <div class="product-card">
-            <div class="product-img">Тут будет фото сыворотки</div>
-            <div class="product-title">Увлажняющая сыворотка для сияния</div>
-            <div class="product-price">120 000 сум</div>
-            <button class="btn-order" onclick="makeOrder('Увлажняющая сыворотка для сияния', '120 000 сум')">Заказать</button>
         </div>
     </div>
 
@@ -55,29 +45,24 @@
     </footer>
 
     <script>
-         function makeOrder(name, price) {
+        function makeOrder(name, price) {
             let phone = prompt("Введите ваш номер телефона для подтверждения заказа (например, +99890...):");
             if (!phone) return;
             
-            // ТВОИ НАСТРОЙКИ (ЗАМЕНИ НА СВОИ ДАННЫЕ)
             let botToken = "8956314842:AAHLYgHRmpBoLzpsHMoQN9zDToSbeyYbj7E";
             let chatId = "6283012181";
             
             let text = `🛍 Новый заказ на сайте Na_style_z!\n\nТовар: ${name}\nЦена: ${price}\nТелефон клиента: ${phone}`;
-            
-            // Официальный бесплатный запрос к серверам Telegram для отправки сообщения
             let url = `https://telegram.org{botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
             
             fetch(url)
-                .then(response => {
-                    if(response.ok) {
-                        alert("🫶🏻 Заказ успешно принят! Мы свяжемся с вами в ближайшее время.");
-                    } else {
-                        alert("Ошибка отправки. Пожалуйста, свяжитесь с нами напрямую.");
-                    }
+                .then(() => {
+                    alert("🫶🏻 Заказ успешно принят! Мы свяжемся с вами в ближайшее время.");
+                })
+                .catch(() => {
+                    alert("Ошибка сети. Попробуйте еще раз.");
                 });
         }
     </script>
 </body>
 </html>
-
