@@ -45,28 +45,18 @@
     </footer>
 
     <script>
-        function makeOrder(name, price) {
-            let phone = prompt("Введите ваш номер телефона для подтверждения заказа (например, +99890...):");
-            if (!phone) return;
+                function makeOrder(name, price) {
+            // СОЗДАЕМ КРАСИВЫЙ ТЕКСТ ДЛЯ КЛИЕНТА
+            let message = `Здравствуйте! Хочу заказать с вашего сайта:\n\n✨ Товар: ${name}\n💰 Цена: ${price}`;
             
-            // ОБМАНЫВАЕМ СИСТЕМУ БЕЗОПАСНОСТИ: РЕЖЕМ ТОКЕН ПОПОЛАМ
-            let part1 = "8956314842:";
-            let part2 = "AAHLYgHRmpBoLzpsHMoQN9zDToSbeyYbj7E";
+            // ОФИЦИАЛЬНАЯ ССЫЛКА ПЕРЕХОДА В ТЕЛЕГРАМ
+            // ЗАМЕНИ 'anvar7_creator' НА РЕАЛЬНЫЙ ЮЗЕРНЕЙМ (ЛОГИН) ТВОЕЙ ЗНАКОМОЙ В ТЕЛЕГРАМЕ (без значка @)
+            let telegramUsername = "@Anvar_217"; 
             
-            // Компьютер сам склеит их в один целый ключ при отправке
-            let botToken = part1 + part2;
-            let chatId = "6253012181"; // Твой ID уже вбит четко
+            let url = `https://t.me{telegramUsername}?text=${encodeURIComponent(message)}`;
             
-            let text = `🛍 Новый заказ на сайте Na_style_z!\n\nТовар: ${name}\nЦена: ${price}\nТелефон клиента: ${phone}`;
-            let url = `https://telegram.org{botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-            
-            fetch(url)
-                .then(() => {
-                    alert("🫶🏻 Заказ успешно принят! Мы свяжемся с вами в ближайшее время.");
-                })
-                .catch(() => {
-                    alert("Ошибка сети. Попробуйте еще раз.");
-                });
+            // Открываем чат Телеграма в новой вкладке телефона
+            window.open(url, '_blank');
         }
     </script>
 </body>
