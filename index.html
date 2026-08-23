@@ -3,59 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Na_style_z — Интернет-магазин косметики в Ташкенте</title>
+    <title>Na_style_z — Бьюти Пространство Ташкент</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #fafafa; color: #333; }
-        header { background: #fff; padding: 20px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        header h1 { margin: 0; font-size: 24px; letter-spacing: 2px; color: #d4a373; text-transform: uppercase; }
-        header p { margin: 5px 0 0; font-size: 12px; color: #888; text-transform: uppercase; }
-        .banner { background: #f4ebd0; padding: 30px 20px; text-align: center; margin-bottom: 20px; }
-        .banner h2 { margin: 0; font-size: 18px; color: #5c4d3c; font-weight: normal; }
-        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
-        .product-card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; }
-        .product-img { width: 100%; height: 250px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 14px; margin-bottom: 10px; }
-        .product-title { font-size: 18px; font-weight: 600; margin: 10px 0 5px; }
-        .product-price { color: #d4a373; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
-        .btn-order { background: #d4a373; color: #fff; border: none; padding: 12px 25px; border-radius: 25px; width: 100%; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        footer { text-align: center; padding: 30px 20px; color: #aaa; font-size: 12px; }
+        /* Премиальный дизайн в стиле Bloom Beauty */
+        :root { --accent: #cb997e; --bg: #fefae0; --dark: #6b705c; --text: #333; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; background: #faf9f6; color: var(--text); }
+        
+        /* Шапка сайта */
+        header { background: #fff; padding: 15px; text-align: center; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        header h1 { margin: 0; font-size: 26px; font-weight: 300; letter-spacing: 4px; color: var(--dark); text-transform: uppercase; }
+        header p { margin: 5px 0 0; font-size: 11px; color: #a3a3a3; text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* Кнопка Корзины в шапке */
+        .cart-badge { position: absolute; right: 20px; top: 20px; background: var(--dark); color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; }
+
+        /* Баннер */
+        .promo-banner { background: #eddcd2; padding: 25px 15px; text-align: center; margin-bottom: 25px; border-radius: 0 0 20px 20px; }
+        .promo-banner h2 { margin: 0; font-size: 16px; color: #5c4d3c; font-weight: 400; letter-spacing: 1px; }
+
+        /* Сетка товаров */
+        .container { max-width: 800px; margin: 0 auto; padding: 0 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 480px) { .container { grid-template-columns: 1fr; } } /* Адаптация под телефоны */
+
+        .product-card { background: #fff; border-radius: 16px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); text-align: center; border: 1px solid #f0f0f0; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-img { width: 100%; height: 180px; background: #f7f7f7; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #bbb; font-size: 13px; }
+        .product-title { font-size: 15px; font-weight: 500; margin: 12px 0 4px; color: #444; }
+        .product-price { color: var(--accent); font-weight: 700; font-size: 15px; margin-bottom: 12px; }
+        
+        /* Кнопки */
+        .btn-add { background: none; border: 1px solid var(--dark); color: var(--dark); padding: 10px; border-radius: 25px; width: 100%; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-add:hover { background: var(--dark); color: #fff; }
+
+        /* Окно оформления заказа */
+        .checkout-panel { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-radius: 24px 24px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.1); padding: 20px; z-index: 200; max-width: 600px; margin: 0 auto; }
+        .checkout-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        .checkout-header h3 { margin: 0; font-size: 18px; color: var(--dark); }
+        .close-panel { font-size: 20px; cursor: pointer; color: #aaa; }
+        .cart-items-list { max-height: 150px; overflow-y: auto; margin-bottom: 15px; font-size: 14px; text-align: left; }
+        .total-price-block { font-size: 16px; font-weight: bold; margin-bottom: 15px; text-align: right; color: var(--dark); }
+        
+        .btn-submit { background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 25px; width: 100%; font-size: 14px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-submit:hover { background: #b88b5c; }
+        
+        footer { text-align: center; padding: 40px 20px; color: #c0c0c0; font-size: 11px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>NA_STYLE_Z</h1>
-        <p>Косметика & Подарки • Ташкент</p>
+        <p>Beauty Space • Tashkent</p>
+        <div class="cart-badge" onclick="toggleCheckout()">🛒 Корзина: <span id="cart-count">0</span></div>
     </header>
 
-    <div class="banner">
-        <h2>Онлайн витрина 🫶🏻<br>Подарки при каждой покупке 🛍🎀</h2>
+    <div class="promo-banner">
+        <h2>✨ Эксклюзивная косметика и парфюмерия • Подарки к каждому заказу 🎀</h2>
     </div>
 
+    <!-- КАТАЛОГ ТОВАРОВ (Сюда ты будешь добавлять новые позиции) -->
     <div class="container">
+        
+        <!-- Товар 1 -->
         <div class="product-card">
-            <div class="product-img">Тут будет фото кушона</div>
-            <div class="product-title">Трендовый Кушон для лица</div>
-            <div class="product-price">145 000 сум</div>
-            <button class="btn-order" onclick="makeOrder('Трендовый Кушон для лица', '145 000 сум')">Заказать</button>
+            <div class="product-img">🖼️ [Фото товара на GitHub]</div>
+            <div class="product-title">Кушон Missha Magic Cushion</div>
+            <div class="product-price">145000</div>
+            <button class="btn-add" onclick="addToCart('Кушон Missha Magic Cushion', 145000)">В корзину</button>
         </div>
+
+        <!-- Товар 2 -->
+        <div class="product-card">
+            <div class="product-img">🖼️ [Фото товара на GitHub]</div>
+            <div class="product-title">Сыворотка Manyo Bifida Biome</div>
+            <div class="product-price">210000</div>
+            <button class="btn-add" onclick="addToCart('Сыворотка Manyo Bifida Biome', 210000)">В корзину</button>
+        </div>
+
+        <!-- Товар 3 -->
+        <div class="product-card">
+            <div class="product-img">🖼️ [Фото товара на GitHub]</div>
+            <div class="product-title">Увлажняющий крем ROUND LAB</div>
+            <div class="product-price">185000</div>
+            <button class="btn-add" onclick="addToCart('Увлажняющий крем ROUND LAB', 185000)">В корзину</button>
+        </div>
+
+    </div>
+
+    <!-- ВСПЛЫВАЮЩАЯ КОРЗИНА -->
+    <div class="checkout-panel" id="checkout-panel">
+        <div class="checkout-header">
+            <h3>Ваш заказ</h3>
+            <span class="close-panel" onclick="toggleCheckout()">✕</span>
+        </div>
+        <div class="cart-items-list" id="cart-items-list">
+            <!-- Сюда JS сам добавит товары -->
+        </div>
+        <div class="total-price-block">
+            Итого: <span id="total-price-val">0</span> сум
+        </div>
+        <button class="btn-submit" onclick="sendOrderViaTelegram()">Отправить заказ в Telegram</button>
     </div>
 
     <footer>
-        <p>© 2026 Na_style_z. Доставка по Ташкенту и Узбекистану.</p>
+        <p>© 2026 Na_style_z. Доставка по Ташкенту и всему Узбекистану.</p>
     </footer>
 
+    <!-- УМНАЯ ЛОГИКА КОРЗИНЫ (Разберись, как работают функции) -->
     <script>
-                function makeOrder(name, price) {
-            // СОЗДАЕМ КРАСИВЫЙ ТЕКСТ ДЛЯ КЛИЕНТА
-            let message = `Здравствуйте! Хочу заказать с вашего сайта:\n\n✨ Товар: ${name}\n💰 Цена: ${price}`;
+        let cart = [];
+
+        // Функция 1: Добавление товара в коробку (массив) корзины
+        def addToCart(name, price) {
+            cart.push({ name: name, price: price });
+            updateCartUI();
+        }
+
+        // Функция 2: Пересчет цифр и обновление экрана
+        def updateCartUI() {
+            document.getElementById("cart-count").innerText = cart.length;
             
-            // ОФИЦИАЛЬНАЯ ССЫЛКА ПЕРЕХОДА В ТЕЛЕГРАМ
-            // ЗАМЕНИ 'anvar7_creator' НА РЕАЛЬНЫЙ ЮЗЕРНЕЙМ (ЛОГИН) ТВОЕЙ ЗНАКОМОЙ В ТЕЛЕГРАМЕ (без значка @)
-            let telegramUsername = "@Anvar_217"; 
+            let listHTML = "";
+            let total = 0;
             
-            let url = `https://t.me/Anvar_217?text=${encodeURIComponent(message)}`;
+            cart.forEach(item => {
+                listHTML += `• ${item.name} — ${item.price.toLocaleString()} сум<br>`;
+                total += item.price;
+            });
             
-            // Открываем чат Телеграма в новой вкладке телефона
+            document.getElementById("cart-items-list").innerHTML = listHTML || "Корзина пуста";
+            document.getElementById("total-price-val").innerText = total.toLocaleString();
+        }
+
+        // Функция 3: Показать/скрыть панель заказа
+        def toggleCheckout() {
+            let panel = document.getElementById("checkout-panel");
+            panel.style.display = (panel.style.display === "block") ? "none" : "block";
+        }
+
+        // Функция 4: Безопасный переход в Telegram к владелице БЕЗ использования токенов
+        def sendOrderViaTelegram() {
+            if (cart.length === 0) {
+                alert("Ваша корзина пуста!");
+                return;
+            }
+
+            let orderText = "🛍️ Новый заказ с онлайн-витрины Na_style_z:\n\n";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                orderText += `${index + 1}. ${item.name} — ${item.price.toLocaleString()} сум\n`;
+                total += item.price;
+            });
+
+            orderText += `\n💰 Итого к оплате: ${total.toLocaleString()} сум`;
+
+            // НАСТРОЙКА: Сюда впиши точный юзернейм (логин) твоей знакомой в ТГ (без знака @)
+            let username = "anvar7_creator"; 
+            
+            let url = `https://t.me{username}?text=${encodeURIComponent(orderText)}`;
             window.open(url, '_blank');
         }
     </script>
