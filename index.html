@@ -138,9 +138,13 @@
         function dispatchOrder() {
             if (Object.keys(basket).length === 0) return;
             let text = "🛍️ Новый заказ из бутика Na_style_z:\n\n", total = 0, idx = 1;
-            for (let name in basket) { let item = basket[name], itemTotal = item.price * item.qty; text += `${idx}. ${name} [${item.qty} шт] — ${itemTotal.toLocaleString()} сум\n`; total += itemTotal; idx++; }
-            text += `\n✨ Итого к оплате: ${total.toLocaleString()} сум`;
-           window.open(`https://t.me{encodeURIComponent(text)}`, '_blank');
+            for (let name in basket) { let item = basket[name], itemTotal = item.price * item.qty; text += `${idx}. ${name} [${item.qty} шт] — ${itemTotal.toLocaleString()} sum\n`; total += itemTotal; idx++; }
+            text += `\n✨ Итого к оплате: ${total.toLocaleString()} sum`;
+            
+            // ВСТАВЬ СЮДА ЕЁ ЛИЧНЫЙ ЮЗЕРНЕЙМ ВМЕСТО ПОДСКАЗКИ (БЕЗ ЗНАКА @)
+            let personalTelegram = "Anvar_217"; 
+            
+            window.open('https://t.me' + personalTelegram + encodeURIComponent(text), '_blank');
         }
     </script>
 </body>
