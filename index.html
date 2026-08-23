@@ -112,14 +112,13 @@
     <script>
         let cart = [];
 
-        // Функция 1: Добавление товара в коробку (массив) корзины
-        def addToCart(name, price) {
+        // Исправлено: теперь это официальные функции JavaScript
+        function addToCart(name, price) {
             cart.push({ name: name, price: price });
             updateCartUI();
         }
 
-        // Функция 2: Пересчет цифр и обновление экрана
-        def updateCartUI() {
+        function updateCartUI() {
             document.getElementById("cart-count").innerText = cart.length;
             
             let listHTML = "";
@@ -134,14 +133,12 @@
             document.getElementById("total-price-val").innerText = total.toLocaleString();
         }
 
-        // Функция 3: Показать/скрыть панель заказа
-        def toggleCheckout() {
+        function toggleCheckout() {
             let panel = document.getElementById("checkout-panel");
             panel.style.display = (panel.style.display === "block") ? "none" : "block";
         }
 
-        // Функция 4: Безопасный переход в Telegram к владелице БЕЗ использования токенов
-        def sendOrderViaTelegram() {
+        function sendOrderViaTelegram() {
             if (cart.length === 0) {
                 alert("Ваша корзина пуста!");
                 return;
